@@ -13,6 +13,8 @@ object AppConstant {
         Language("zh","Chinese"),
     )
 
+    const val Test=1_00_000
+
 
     fun Logger(Tag:String,Value:String){
         Log.e(Tag,Value);

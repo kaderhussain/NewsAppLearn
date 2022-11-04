@@ -34,7 +34,6 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setupUI(){
-        val btnTopHeadline = binding.btnTopHeadline
         val btnNewsSources = binding.btnNewsSources
         val btnLanguages = binding.btnLanguages
         val btnCountries = binding.btnCountries
@@ -42,8 +41,8 @@ class MainActivity: AppCompatActivity() {
 
 
 
-        btnTopHeadline.setOnClickListener {
-            startActivity(TopHeadlineActivity.getStartIntent(this))
+        binding.btnTopHeadline.setOnClickListener {
+            startActivity(TopHeadlineActivity.getStartIntent(this,"us"))
         }
 
         btnNewsSources.setOnClickListener {

@@ -21,6 +21,4 @@ class TopHeadlineRepository @Inject constructor(private val networkService: Netw
         }
     }
 
-
-
 }

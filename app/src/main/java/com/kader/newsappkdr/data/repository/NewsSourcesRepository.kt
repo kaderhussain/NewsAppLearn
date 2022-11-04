@@ -8,7 +8,9 @@ import com.kader.newsappkdr.data.model.Article
 import com.kader.newsappkdr.data.model.NewsSources
 import com.kader.newsappkdr.data.model.NewsSourcesResponse
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class NewsSourcesRepository  @Inject constructor(private val networkService: NetworkServices){
 
     fun getNewsSources():Flow<List<NewsSources>>{

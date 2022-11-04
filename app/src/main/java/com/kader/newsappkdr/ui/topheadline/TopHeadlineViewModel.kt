@@ -1,5 +1,6 @@
 package com.kader.newsappkdr.ui.topheadline
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,19 +18,19 @@ class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineReposit
 
     val articleList: StateFlow<Resource<List<Article>>> = _articleList
 
-    init {
-        fetchNews()
-    }
-
-    private fun fetchNews() {
+    
+    
+     fun fetchNews(country:String) {
         viewModelScope.launch {
-            topHeadlineRepository.getTopHeadlines(COUNTRY)
-                .catch { e ->
-                    _articleList.value = Resource.error(e.toString())
-                }
-                .collect {
-                    _articleList.value = Resource.success(it)
-                }
+            Log.e("country",country)
+                topHeadlineRepository.getTopHeadlines(country)
+                    .catch { e ->
+                        _articleList.value = Resource.error(e.toString())
+                    }
+                    .collect {
+                        _articleList.value = Resource.success(it)
+                    }
+
         }
     }
 

@@ -68,7 +68,7 @@ class CountryActivity: AppCompatActivity() {
 
     private fun setupObserver() {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
                 countryViewModel.countryList.collect {
                     when (it.status) {
                         Status.SUCCESS -> {
@@ -93,7 +93,7 @@ class CountryActivity: AppCompatActivity() {
     }
 
     private fun renderList(countryList: List<Countries>) {
-        adapter.addData(countryList)
+        adapter.addData(countryList.distinctBy{it.country})
         adapter.notifyDataSetChanged()
     }
 

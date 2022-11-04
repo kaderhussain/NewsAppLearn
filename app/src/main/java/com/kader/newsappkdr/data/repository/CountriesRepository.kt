@@ -9,7 +9,9 @@ import com.kader.newsappkdr.data.model.Countries
 import com.kader.newsappkdr.data.model.NewsSources
 import com.kader.newsappkdr.data.model.NewsSourcesResponse
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class CountriesRepository  @Inject constructor(private val networkService: NetworkServices){
 
     fun getCountries():Flow<List<Countries>>{

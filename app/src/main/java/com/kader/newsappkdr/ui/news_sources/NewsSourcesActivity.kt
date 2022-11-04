@@ -93,7 +93,7 @@ class NewsSourcesActivity: AppCompatActivity() {
     }
 
     private fun renderList(newSourceList: List<NewsSources>) {
-        adapter.addData(newSourceList)
+        adapter.addData(newSourceList.distinctBy { it.name })
         adapter.notifyDataSetChanged()
     }
 

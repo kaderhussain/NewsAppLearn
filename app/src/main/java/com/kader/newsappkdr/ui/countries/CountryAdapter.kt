@@ -1,5 +1,6 @@
 package com.kader.newsappkdr.ui.countries
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,15 +8,20 @@ import com.kader.newsappkdr.data.model.Countries
 import com.kader.newsappkdr.databinding.CountriesItemLayoutBinding
 import com.kader.newsappkdr.databinding.NewsSourcesItemLayoutBinding
 import com.kader.newsappkdr.ui.news_sources.NewsSourcesAdapter
+import com.kader.newsappkdr.ui.topheadline.TopHeadlineActivity
 
 class CountryAdapter(
     private val countryList: ArrayList<Countries>
+
 ) : RecyclerView.Adapter<CountryAdapter.DataViewHolder>() {
 
     class DataViewHolder(private val binding: CountriesItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(article: Countries) {
-            binding.textViewTitle.text = article.country
+        fun bind(language: Countries) {
+            binding.textViewTitle.text = language.country
+            binding.textViewTitle.setOnClickListener {
+                it.context.startActivity(TopHeadlineActivity.getStartIntent( it.context,language.country))
+            }
         }
     }
 

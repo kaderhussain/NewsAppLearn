@@ -3,6 +3,7 @@ package com.kader.newsappkdr.ui.topheadline
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,9 +25,20 @@ class TopHeadlineActivity : AppCompatActivity() {
 
 
     companion object{
+        private const val EXTRA_COUNTRY="EXTRA_COUNTRY"
+
         fun getStartIntent(context: Context): Intent {
             return Intent(context, TopHeadlineActivity::class.java)
         }
+        fun getStartIntent(context: Context,country:String): Intent {
+            return Intent(context, TopHeadlineActivity::class.java)
+                .apply {
+                    putExtra(EXTRA_COUNTRY,country)
+                }
+        }
+
+
+
     }
 
     @Inject
@@ -42,8 +54,17 @@ class TopHeadlineActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTopHeadlineBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setupUI()
         setupObserver()
+        getIntentAndFetchNews()
+    }
+
+    private fun getIntentAndFetchNews(){
+        val country= intent.getStringExtra(EXTRA_COUNTRY)
+        country?.let {
+            newsListViewModel.fetchNews(it)
+        }
     }
 
     private fun setupUI() {
@@ -65,6 +86,7 @@ class TopHeadlineActivity : AppCompatActivity() {
                     when (it.status) {
                         Status.SUCCESS -> {
                             binding.progressBar.visibility = View.GONE
+                            Log.e("newsList ","--${it.data}")
                             it.data?.let { newsList -> renderList(newsList) }
                             binding.recyclerView.visibility = View.VISIBLE
                         }
