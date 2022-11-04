@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NewsAppKdr</string>
+    <string name="top_headline">Top Headline</string>
+    <string name="news_sources">News Sources</string>
+    <string name="countries">Countries</string>
+    <string name="language">Languages</string>
+    <string name="search">Search</string>
 </resources>
