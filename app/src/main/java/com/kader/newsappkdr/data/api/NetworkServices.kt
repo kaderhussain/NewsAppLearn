@@ -3,6 +3,7 @@ package com.kader.newsappkdr.data.api
 import com.kader.newsappkdr.data.api.Networking.API_KEY
 import com.kader.newsappkdr.data.model.CountriesResponse
 import com.kader.newsappkdr.data.model.NewsSourcesResponse
+import com.kader.newsappkdr.data.model.SearchNewssResponse
 import com.kader.newsappkdr.data.model.TopHeadlinesResponse
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -23,5 +24,9 @@ interface NetworkServices {
     @Headers("X-Api-Key: $API_KEY")
     @GET("top-headlines/sources")
     suspend fun getCountries(): CountriesResponse
+
+    @Headers("X-Api-Key: $API_KEY")
+    @GET("everything")
+    suspend fun getSearchNews(@Query("q") search: String): SearchNewssResponse
 
 }

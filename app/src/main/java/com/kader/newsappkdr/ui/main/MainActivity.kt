@@ -11,6 +11,7 @@ import com.kader.newsappkdr.di.module.ActivityModule
 import com.kader.newsappkdr.ui.countries.CountryActivity
 import com.kader.newsappkdr.ui.languages.LanguageActivity
 import com.kader.newsappkdr.ui.news_sources.NewsSourcesActivity
+import com.kader.newsappkdr.ui.search.SearchActivity
 import com.kader.newsappkdr.ui.topheadline.TopHeadlineActivity
 import com.kader.newsappkdr.utils.AppConstant
 import javax.inject.Inject
@@ -34,10 +35,7 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setupUI(){
-        val btnNewsSources = binding.btnNewsSources
-        val btnLanguages = binding.btnLanguages
-        val btnCountries = binding.btnCountries
-        val btnSearch = binding.btnSearch
+
 
 
 
@@ -45,16 +43,20 @@ class MainActivity: AppCompatActivity() {
             startActivity(TopHeadlineActivity.getStartIntent(this,"us"))
         }
 
-        btnNewsSources.setOnClickListener {
+        binding.btnNewsSources.setOnClickListener {
             startActivity(NewsSourcesActivity.getStartIntent(this))
         }
 
-        btnCountries.setOnClickListener {
+        binding.btnCountries.setOnClickListener {
             startActivity(CountryActivity.getStartIntent(this))
         }
 
-        btnLanguages.setOnClickListener {
+        binding.btnLanguages.setOnClickListener {
             startActivity(LanguageActivity.getStartIntent(this))
+        }
+
+        binding.btnSearch.setOnClickListener {
+            startActivity(SearchActivity.getStartIntent(this))
         }
     }
 

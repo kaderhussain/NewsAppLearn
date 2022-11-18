@@ -7,6 +7,7 @@ import com.kader.newsappkdr.ui.countries.CountryActivity
 import com.kader.newsappkdr.ui.languages.LanguageActivity
 import com.kader.newsappkdr.ui.main.MainActivity
 import com.kader.newsappkdr.ui.news_sources.NewsSourcesActivity
+import com.kader.newsappkdr.ui.search.SearchActivity
 import com.kader.newsappkdr.ui.topheadline.TopHeadlineActivity
 
 @ActivityScope
@@ -22,6 +23,9 @@ interface ActivityComponent {
     fun injectCountires(activity: CountryActivity)
 
     fun injectLanguage(activity: LanguageActivity)
+
+    fun injectSearchNews(activity: SearchActivity)
+
 
 
 }

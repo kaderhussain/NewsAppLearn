@@ -1,6 +1,7 @@
 package com.kader.newsappkdr.utils
 
 import android.util.Log
+import com.kader.newsappkdr.data.model.Countries
 import com.kader.newsappkdr.data.model.Language
 
 object AppConstant {
@@ -13,7 +14,13 @@ object AppConstant {
         Language("zh","Chinese"),
     )
 
-    const val Test=1_00_000
+
+    val COUNTRIES = arrayListOf(Countries("en","English"),
+        Countries("in","India"),
+        Countries("us","USA"),
+        Countries("ca","Cananda"),
+        Countries("ar","Arabic"),
+    )
 
 
     fun Logger(Tag:String,Value:String){

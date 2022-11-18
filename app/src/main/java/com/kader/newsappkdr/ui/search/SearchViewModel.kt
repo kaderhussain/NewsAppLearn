@@ -1,4 +1,4 @@
-package com.kader.newsappkdr.ui.topheadline
+package com.kader.newsappkdr.ui.search
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -8,11 +8,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import com.kader.newsappkdr.data.model.Article
+import com.kader.newsappkdr.data.repository.SearchRepository
 import com.kader.newsappkdr.data.repository.TopHeadlineRepository
 import com.kader.newsappkdr.utils.AppConstant.COUNTRY
 import com.kader.newsappkdr.utils.Resource
 
-class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository) : ViewModel() {
+class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
 
     private val _articleList = MutableStateFlow<Resource<List<Article>>>(Resource.loading())
 
@@ -23,16 +24,28 @@ class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineReposit
     }
     
     
-     fun fetchNews(country:String) {
+     fun fetchNews(query:String) {
         viewModelScope.launch {
-            Log.e("country",country)
-                topHeadlineRepository.getTopHeadlines(country)
+            searchRepository.getSearchNews(query)
                     .catch { e ->
                         _articleList.value = Resource.error(e.toString())
                     }
                     .collect {
                         _articleList.value = Resource.success(it)
                     }
+
+        }
+    }
+
+    fun fetchDefault(country:String) {
+        viewModelScope.launch {
+            searchRepository.getDefaultNews(country)
+                .catch { e ->
+                    _articleList.value = Resource.error(e.toString())
+                }
+                .collect {
+                    _articleList.value = Resource.success(it)
+                }
 
         }
     }
