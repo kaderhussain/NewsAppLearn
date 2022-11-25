@@ -2,10 +2,8 @@ package com.kader.newsappkdr.ui.news_sources
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kader.newsappkdr.data.model.Article
 import com.kader.newsappkdr.data.model.NewsSources
 import com.kader.newsappkdr.data.repository.NewsSourcesRepository
-import com.kader.newsappkdr.utils.AppConstant
 import com.kader.newsappkdr.utils.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

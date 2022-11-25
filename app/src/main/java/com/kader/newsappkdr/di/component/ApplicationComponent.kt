@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.Component
 import com.kader.newsappkdr.NewsApplication
 import com.kader.newsappkdr.data.api.NetworkServices
+import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.data.repository.*
 import com.kader.newsappkdr.di.ApplicationContext
 import com.kader.newsappkdr.di.module.ApplicationModule
@@ -19,6 +20,8 @@ interface ApplicationComponent {
     fun getContext(): Context
 
     fun getNetworkService(): NetworkServices
+
+    fun getDbHelper(): DatabaseHelperImpl
 
     fun getTopHeadlineRepository(): TopHeadlineRepository
 

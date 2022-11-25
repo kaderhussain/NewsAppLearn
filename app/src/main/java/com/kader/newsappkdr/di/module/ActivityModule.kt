@@ -31,10 +31,10 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
 
     @Provides
-    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository,databaseHelperImpl: DatabaseHelperImpl): TopHeadlineViewModel {
+    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository): TopHeadlineViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(TopHeadlineViewModel::class) {
-                TopHeadlineViewModel(topHeadlineRepository,databaseHelperImpl)
+                TopHeadlineViewModel(topHeadlineRepository)
             })[TopHeadlineViewModel::class.java]
     }
 

@@ -30,3 +30,11 @@ interface NetworkServices {
     suspend fun getSearchNews(@Query("q") search: String): SearchNewssResponse
 
 }
+
+
+//
+
+
+
+
+

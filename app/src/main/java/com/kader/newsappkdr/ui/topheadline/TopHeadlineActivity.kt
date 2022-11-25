@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import com.kader.newsappkdr.NewsApplication
-import com.kader.newsappkdr.data.model.Article
+import com.kader.newsappkdr.data.local.entity.Article
+import com.kader.newsappkdr.data.model.ApiArticle
 import com.kader.newsappkdr.databinding.ActivityTopHeadlineBinding
 import com.kader.newsappkdr.di.component.DaggerActivityComponent
 import com.kader.newsappkdr.di.module.ActivityModule
@@ -63,7 +64,7 @@ class TopHeadlineActivity : AppCompatActivity() {
     private fun getIntentAndFetchNews(){
         val country= intent.getStringExtra(EXTRA_COUNTRY)
         country?.let {
-            newsListViewModel.fetchNews(it)
+            newsListViewModel.fetchNews(it,true)
         }
     }
 
@@ -82,7 +83,7 @@ class TopHeadlineActivity : AppCompatActivity() {
     private fun setupObserver() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                newsListViewModel.articleList.collect {
+                newsListViewModel.apiArticleList.collect {
                     when (it.status) {
                         Status.SUCCESS -> {
                             binding.progressBar.visibility = View.GONE

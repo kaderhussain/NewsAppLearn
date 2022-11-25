@@ -4,21 +4,20 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.kader.newsappkdr.data.model.Article
+import com.kader.newsappkdr.data.local.entity.Article
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TopHeadlineDao {
 
     @Query("SELECT * FROM Article")
-    fun getAllTopHeadline(): List<Article>
+    fun getAllTopHeadline(): Flow<List<Article>>
 
     @Insert
     fun insertAll(topHeadline: List<Article>)
 
-    @Delete
-    fun delete(topHeadline: Article)
-
-
+    @Query("Delete from Article")
+    fun deleteAll(): Int
 
 
 }

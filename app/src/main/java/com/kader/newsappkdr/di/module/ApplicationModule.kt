@@ -4,6 +4,9 @@ import android.content.Context
 import com.kader.newsappkdr.NewsApplication
 import com.kader.newsappkdr.data.api.NetworkServices
 import com.kader.newsappkdr.data.api.Networking
+import com.kader.newsappkdr.data.local.AppDatabase
+import com.kader.newsappkdr.data.local.DatabaseBuilder
+import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.di.ApplicationContext
 import dagger.Module
 import dagger.Provides
@@ -21,5 +24,9 @@ class ApplicationModule(private val application: NewsApplication) {
     @Provides
     @Singleton
     fun provideNetworkService(): NetworkServices = Networking.create()
+
+    @Provides
+    @Singleton
+    fun provideDatabaseBuilder(): AppDatabase = DatabaseBuilder.getInstance(application)
 
 }

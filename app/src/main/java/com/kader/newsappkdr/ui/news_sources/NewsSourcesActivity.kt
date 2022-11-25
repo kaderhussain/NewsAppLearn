@@ -3,7 +3,6 @@ package com.kader.newsappkdr.ui.news_sources
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,13 +12,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kader.newsappkdr.NewsApplication
-import com.kader.newsappkdr.data.model.Article
 import com.kader.newsappkdr.data.model.NewsSources
 import com.kader.newsappkdr.databinding.ActivityNewsSourcesBinding
-import com.kader.newsappkdr.databinding.ActivityTopHeadlineBinding
 import com.kader.newsappkdr.di.component.DaggerActivityComponent
 import com.kader.newsappkdr.di.module.ActivityModule
-import com.kader.newsappkdr.ui.topheadline.TopHeadlineAdapter
 import com.kader.newsappkdr.utils.Status
 import kotlinx.coroutines.launch
 import javax.inject.Inject

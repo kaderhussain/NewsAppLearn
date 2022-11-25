@@ -4,9 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import com.kader.newsappkdr.data.api.NetworkServices
-import com.kader.newsappkdr.data.model.Article
 import com.kader.newsappkdr.data.model.NewsSources
-import com.kader.newsappkdr.data.model.NewsSourcesResponse
 import javax.inject.Inject
 import javax.inject.Singleton
 
