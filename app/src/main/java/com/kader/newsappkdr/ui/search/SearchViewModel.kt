@@ -20,22 +20,24 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
     val articleList: StateFlow<Resource<List<Article>>> = _articleList
 
     init {
-        fetchNews("us")
+//        fetchNews("us")
     }
     
     
-     fun fetchNews(query:String) {
-        viewModelScope.launch {
-            searchRepository.getSearchNews(query)
-                    .catch { e ->
-                        _articleList.value = Resource.error(e.toString())
-                    }
-                    .collect {
-                        _articleList.value = Resource.success(it)
-                    }
+//     fun fetchNews(query:String) {
+//        viewModelScope.launch {
+//            searchRepository.getSearchNews(query)
+//                    .catch { e ->
+//                        _articleList.value = Resource.error(e.toString())
+//                    }
+//                    .collect {
+//                        _articleList.value = Resource.success(it)
+//                    }
+//
+//        }
+//    }
 
-        }
-    }
+    fun fetchSearchNews(query: String)=searchRepository.getSearchNews(query)
 
     fun fetchDefault(country:String) {
         viewModelScope.launch {

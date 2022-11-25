@@ -64,7 +64,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupUI()
-        setupObserver()
+//        setupObserver()
 
 
     }
@@ -86,64 +86,69 @@ class SearchActivity : AppCompatActivity() {
         lifecycleScope.launch {
             searchView.getQueryTextChangeStateFlow()
                 .debounce(300)
-                .distinctUntilChanged()
-                .flatMapLatest { query ->
-                    dataFromNetwork(query)
-                        .catch {
-                            emitAll(flowOf(""))
-                        }
-                }
-                .flowOn(Dispatchers.Default)
-                .collect { result ->
-//                    textViewResult.text = result
-                    Log.e("result ",result)
-                    if(result.isNotEmpty()) {
-                        searchViewModel.fetchNews(result)
-                    }else{
-                        searchViewModel.fetchDefault("us")
-                    }
-                }
-        }
-
-    }
-
-    private fun dataFromNetwork(query: String): Flow<String> {
-        return flow {
-            delay(1000)
-            emit(query)
-        }
-    }
-
-
-    private fun setupObserver() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                searchViewModel.articleList.collect {
-                    when (it.status) {
-                        Status.SUCCESS -> {
+                .filter { query ->
+                    val validQuery = query.isNotEmpty() && query.length>3
+                    if(!validQuery){
                             binding.progressBar.visibility = View.GONE
-                            Log.e("newsList ","--${it.data}")
-                            it.data?.let { newsList -> renderList(newsList) }
+                            renderList(emptyList())
                             binding.recyclerView.visibility = View.VISIBLE
-                        }
-                        Status.LOADING -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                            binding.recyclerView.visibility = View.GONE
-                        }
-                        Status.ERROR -> {
-                            //Handle Error
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(this@SearchActivity, it.message, Toast.LENGTH_LONG)
-                                .show()
-                        }
+
+                    }else{
+                        binding.progressBar.visibility = View.VISIBLE
                     }
+                    return@filter validQuery
+
                 }
-            }
+                .distinctUntilChanged()
+                .flowOn(Dispatchers.Main)
+                .flatMapLatest { query ->
+                   return@flatMapLatest searchViewModel.fetchSearchNews(query)
+                       .catch {
+                           emitAll(flowOf(emptyList()))
+                       }
+                }
+                .flowOn(Dispatchers.IO)
+                .collect { result ->
+                    binding.progressBar.visibility = View.GONE
+                    result?.let { newsList -> renderList(newsList) }
+                    binding.recyclerView.visibility = View.VISIBLE
+                }
         }
+
     }
+
+
+
+
+//    private fun setupObserver() {
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                searchViewModel.articleList.collect {
+//                    when (it.status) {
+//                        Status.SUCCESS -> {
+//                            binding.progressBar.visibility = View.GONE
+//                            Log.e("newsList ","--${it.data}")
+//                            it.data?.let { newsList -> renderList(newsList) }
+//                            binding.recyclerView.visibility = View.VISIBLE
+//                        }
+//                        Status.LOADING -> {
+//                            binding.progressBar.visibility = View.VISIBLE
+//                            binding.recyclerView.visibility = View.GONE
+//                        }
+//                        Status.ERROR -> {
+//                            //Handle Error
+//                            binding.progressBar.visibility = View.GONE
+//                            Toast.makeText(this@SearchActivity, it.message, Toast.LENGTH_LONG)
+//                                .show()
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     private fun renderList(articleList: List<Article>) {
-        adapter.addData(articleList)
+        adapter.replaceData(articleList)
         adapter.notifyDataSetChanged()
     }
 

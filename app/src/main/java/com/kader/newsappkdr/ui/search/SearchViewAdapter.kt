@@ -47,7 +47,13 @@ class SearchViewAdapter(
         holder.bind(articleList[position])
 
     fun addData(list: List<Article>) {
+
         articleList.addAll(list)
     }
 
+    fun replaceData(list: List<Article>){
+        articleList.clear()
+        articleList.addAll(list)
+
+    }
 }

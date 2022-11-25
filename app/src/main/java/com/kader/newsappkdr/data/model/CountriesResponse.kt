@@ -6,5 +6,5 @@ data class CountriesResponse (
     @SerializedName("status")
     val status: String = "",
     @SerializedName("sources")
-    val sources: List<Countries> = ArrayList(),
+    val sources: List<Country> = ArrayList(),
 )

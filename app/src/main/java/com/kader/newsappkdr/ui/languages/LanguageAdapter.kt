@@ -1,16 +1,10 @@
 package com.kader.newsappkdr.ui.languages
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.kader.newsappkdr.data.model.Countries
 import com.kader.newsappkdr.data.model.Language
 import com.kader.newsappkdr.databinding.CountriesItemLayoutBinding
-import com.kader.newsappkdr.ui.countries.CountryAdapter
-import com.kader.newsappkdr.ui.topheadline.TopHeadlineActivity
-import javax.inject.Inject
 
 class LanguageAdapter (
     private val languageList: ArrayList<Language>

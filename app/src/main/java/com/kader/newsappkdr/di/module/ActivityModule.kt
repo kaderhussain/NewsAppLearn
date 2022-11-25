@@ -3,6 +3,7 @@ package com.kader.newsappkdr.di.module
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.data.repository.*
 import com.kader.newsappkdr.di.ActivityContext
 import com.kader.newsappkdr.ui.base.ViewModelProviderFactory
@@ -30,10 +31,10 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
 
     @Provides
-    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository): TopHeadlineViewModel {
+    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository,databaseHelperImpl: DatabaseHelperImpl): TopHeadlineViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(TopHeadlineViewModel::class) {
-                TopHeadlineViewModel(topHeadlineRepository)
+                TopHeadlineViewModel(topHeadlineRepository,databaseHelperImpl)
             })[TopHeadlineViewModel::class.java]
     }
 
