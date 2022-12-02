@@ -20,6 +20,7 @@ class TopHeadlineRepository @Inject constructor(private val networkService: Netw
             emit(networkService.getTopHeadlines(country))
             }
             .map {
+
                val apiArticles =  it.apiArticles
                val articles = mutableListOf<Article>()
                for (apiArticle in apiArticles){

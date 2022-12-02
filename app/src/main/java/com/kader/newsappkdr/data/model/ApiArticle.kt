@@ -16,6 +16,4 @@ data class ApiArticle(
     val apiSource: ApiSource
 )
 
-fun ApiArticle.toArticle() : Article {
-    return Article(title=this.title, description = this.description,url =this.url, imageUrl = this.imageUrl, source_id = this.apiSource.id, source_name = this.apiSource.name)
-}
+fun ApiArticle.toArticle() : Article = Article(title=this.title, description = this.description,url =this.url, imageUrl = this.imageUrl, source_id = this.apiSource.id, source_name = this.apiSource.name)

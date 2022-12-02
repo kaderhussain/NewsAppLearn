@@ -3,6 +3,7 @@ package com.kader.newsappkdr.di.module
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.kader.newsappkdr.data.api.NetworkHelper
 import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.data.repository.*
 import com.kader.newsappkdr.di.ActivityContext
@@ -86,5 +87,9 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideSearchAdapter() = SearchViewAdapter(ArrayList())
+
+    @Provides
+    fun provideNetworkHelper() = NetworkHelper(provideContext())
+
 
 }

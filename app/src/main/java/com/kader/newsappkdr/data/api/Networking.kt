@@ -1,5 +1,6 @@
 package com.kader.newsappkdr.data.api
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,11 +13,18 @@ object Networking {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(createHttpService())
             .build()
             .create(NetworkServices::class.java)
     }
 
 
+    fun createHttpService(): OkHttpClient {
+        val builder = OkHttpClient().newBuilder()
+            .addInterceptor(AuthInterceptor())
+        return builder.build()
+
+    }
 
 
 }

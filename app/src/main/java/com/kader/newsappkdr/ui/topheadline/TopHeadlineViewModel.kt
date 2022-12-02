@@ -3,6 +3,7 @@ package com.kader.newsappkdr.ui.topheadline
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kader.newsappkdr.data.api.NetworkHelper
 import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.data.local.entity.Article
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +15,7 @@ import com.kader.newsappkdr.data.repository.TopHeadlineRepository
 import com.kader.newsappkdr.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
 
 class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository) : ViewModel() {
@@ -52,8 +54,9 @@ class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineReposit
         }
     }
 
-    fun fetchNews(country :String,isInternetConnected: Boolean){
-        if(isInternetConnected){
+    fun fetchNews(country :String,networkHelper: NetworkHelper){
+        Log.e("isNetworkConnected","network ${networkHelper.isNetworkconnected()} ")
+        if(networkHelper.isNetworkconnected()){
             fetchNewsFromNetworkAndSaveInDB(country)
         }else{
             fetchNewsDirectlyFromDB()

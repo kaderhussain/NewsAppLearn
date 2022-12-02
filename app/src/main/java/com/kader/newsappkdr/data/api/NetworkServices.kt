@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @Singleton
 interface NetworkServices {
 
-    @Headers("X-Api-Key: $API_KEY")
     @GET("top-headlines")
     suspend fun getTopHeadlines(@Query("country") country: String): TopHeadlinesResponse
 

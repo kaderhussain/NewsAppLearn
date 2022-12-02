@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
 import com.kader.newsappkdr.NewsApplication
+import com.kader.newsappkdr.data.api.NetworkHelper
 import com.kader.newsappkdr.data.local.entity.Article
 import com.kader.newsappkdr.data.model.ApiArticle
 import com.kader.newsappkdr.databinding.ActivityTopHeadlineBinding
@@ -48,6 +49,9 @@ class TopHeadlineActivity : AppCompatActivity() {
     @Inject
     lateinit var adapter: TopHeadlineAdapter
 
+    @Inject
+    lateinit var networkHelper: NetworkHelper
+
     private lateinit var binding: ActivityTopHeadlineBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +68,7 @@ class TopHeadlineActivity : AppCompatActivity() {
     private fun getIntentAndFetchNews(){
         val country= intent.getStringExtra(EXTRA_COUNTRY)
         country?.let {
-            newsListViewModel.fetchNews(it,true)
+            newsListViewModel.fetchNews(it,networkHelper)
         }
     }
 
