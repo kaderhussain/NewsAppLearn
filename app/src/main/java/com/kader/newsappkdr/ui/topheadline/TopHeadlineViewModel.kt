@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 
-class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository) : ViewModel() {
+class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository,private val networkHelper:NetworkHelper) : ViewModel() {
 
     private val _Api_articleList = MutableStateFlow<Resource<List<Article>>>(Resource.loading())
 
@@ -37,8 +37,9 @@ class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineReposit
                 }
 
         }
+
     }
-    
+
      private fun fetchNewsFromNetworkAndSaveInDB(country:String) {
         viewModelScope.launch {
             Log.e("country",country)
@@ -54,8 +55,7 @@ class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineReposit
         }
     }
 
-    fun fetchNews(country :String,networkHelper: NetworkHelper){
-        Log.e("isNetworkConnected","network ${networkHelper.isNetworkconnected()} ")
+    fun fetchNews(country :String){
         if(networkHelper.isNetworkconnected()){
             fetchNewsFromNetworkAndSaveInDB(country)
         }else{

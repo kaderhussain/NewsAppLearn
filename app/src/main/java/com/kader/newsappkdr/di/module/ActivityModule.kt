@@ -32,10 +32,10 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
 
     @Provides
-    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository): TopHeadlineViewModel {
+    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository,networkHelper: NetworkHelper): TopHeadlineViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(TopHeadlineViewModel::class) {
-                TopHeadlineViewModel(topHeadlineRepository)
+                TopHeadlineViewModel(topHeadlineRepository, networkHelper)
             })[TopHeadlineViewModel::class.java]
     }
 
@@ -87,9 +87,5 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideSearchAdapter() = SearchViewAdapter(ArrayList())
-
-    @Provides
-    fun provideNetworkHelper() = NetworkHelper(provideContext())
-
 
 }

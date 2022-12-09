@@ -13,13 +13,13 @@ object Networking {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(createHttpService())
+            .client(createOKHttpService())
             .build()
             .create(NetworkServices::class.java)
     }
 
 
-    fun createHttpService(): OkHttpClient {
+    fun createOKHttpService(): OkHttpClient {
         val builder = OkHttpClient().newBuilder()
             .addInterceptor(AuthInterceptor())
         return builder.build()

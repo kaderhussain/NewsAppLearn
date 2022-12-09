@@ -20,7 +20,6 @@ class TopHeadlineRepository @Inject constructor(private val networkService: Netw
             emit(networkService.getTopHeadlines(country))
             }
             .map {
-
                val apiArticles =  it.apiArticles
                val articles = mutableListOf<Article>()
                for (apiArticle in apiArticles){
@@ -29,19 +28,15 @@ class TopHeadlineRepository @Inject constructor(private val networkService: Netw
                 return@map articles
              }
             .flatMapConcat { articles ->
-
                 return@flatMapConcat flow {
                     emit(databaseHelperImpl.deleteAll())
-                }.map {
-                    return@map articles
+                }.flatMapConcat {
+                    return@flatMapConcat databaseHelperImpl.insertAll(articles)
+                }.flatMapConcat {
+                    return@flatMapConcat databaseHelperImpl.getTopHeadline()
                 }
             }
-            .flatMapConcat {
 
-                return@flatMapConcat databaseHelperImpl.insertAll(it)
-            }.flatMapConcat {
-                return@flatMapConcat databaseHelperImpl.getTopHeadline()
-            }
     }
 
     fun getTopHeadlineDirectlyFromDB() :Flow<List<Article>> {

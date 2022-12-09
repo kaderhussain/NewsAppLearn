@@ -16,15 +16,12 @@ interface NetworkServices {
     @GET("top-headlines")
     suspend fun getTopHeadlines(@Query("country") country: String): TopHeadlinesResponse
 
-    @Headers("X-Api-Key: $API_KEY")
     @GET("top-headlines/sources")
     suspend fun getNewsSources(): NewsSourcesResponse
 
-    @Headers("X-Api-Key: $API_KEY")
     @GET("top-headlines/sources")
     suspend fun getCountries(): CountriesResponse
 
-    @Headers("X-Api-Key: $API_KEY")
     @GET("everything")
     suspend fun getSearchNews(@Query("q") search: String): SearchNewssResponse
 
