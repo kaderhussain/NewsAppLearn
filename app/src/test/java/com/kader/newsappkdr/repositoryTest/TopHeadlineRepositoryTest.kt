@@ -46,8 +46,8 @@ class TopHeadlineRepositoryTest {
             val country="us"
             topHeadlineRepository = TopHeadlineRepository(networkServices,databaseHelperImpl)
             doReturn(TopHeadlinesResponse("",0,emptyList<ApiArticle>())).`when`(networkServices).getTopHeadlines(country)
-            doReturn(1).`when`(databaseHelperImpl).deleteAll()
-            doReturn(flowOf(emptyList<Article>())).`when`(databaseHelperImpl).insertAll(emptyList<Article>())
+            doReturn(0).`when`(databaseHelperImpl).deleteAll()
+            doReturn(flowOf(Unit)).`when`(databaseHelperImpl).insertAll(emptyList<Article>())
             doReturn(flowOf(emptyList<Article>())).`when`(databaseHelperImpl).getTopHeadline()
 
             topHeadlineRepository.getTopHeadlines(country).test {
@@ -56,8 +56,8 @@ class TopHeadlineRepositoryTest {
             }
             verify(networkServices).getTopHeadlines(country)
             verify(databaseHelperImpl).deleteAll()
-//            verify(databaseHelperImpl).insertAll(emptyList<Article>())
-//            verify(databaseHelperImpl).getTopHeadline()
+            verify(databaseHelperImpl).insertAll(emptyList<Article>())
+            verify(databaseHelperImpl).getTopHeadline()
 
         }
 
