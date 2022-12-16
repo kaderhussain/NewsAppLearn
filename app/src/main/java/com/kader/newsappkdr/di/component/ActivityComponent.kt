@@ -1,6 +1,7 @@
 package com.kader.newsappkdr.di.component
 
 import android.content.Context
+import com.kader.newsappkdr.data.repository.*
 import com.kader.newsappkdr.di.ActivityContext
 import dagger.Component
 import com.kader.newsappkdr.di.ActivityScope

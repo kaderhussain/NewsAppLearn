@@ -1,39 +1,34 @@
 package com.kader.newsappkdr.ui.topheadline
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kader.newsappkdr.data.api.NetworkHelper
-import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.data.local.entity.Article
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import com.kader.newsappkdr.data.model.ApiArticle
 import com.kader.newsappkdr.data.repository.TopHeadlineRepository
+import com.kader.newsappkdr.utils.DispatcherProvider
 import com.kader.newsappkdr.utils.Resource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
 
 
-class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository,private val networkHelper:NetworkHelper) : ViewModel() {
+class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository,private val networkHelper:NetworkHelper,private val dispatcherProvider: DispatcherProvider) : ViewModel() {
 
-    private val _Api_articleList = MutableStateFlow<Resource<List<Article>>>(Resource.loading())
+    private val _apiArticleList = MutableStateFlow<Resource<List<Article>>>(Resource.loading())
 
-    val apiArticleList: StateFlow<Resource<List<Article>>> = _Api_articleList
-
+    val apiArticleList: StateFlow<Resource<List<Article>>> = _apiArticleList
 
     private fun fetchNewsDirectlyFromDB(){
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcherProvider.main) {
             topHeadlineRepository.getTopHeadlineDirectlyFromDB()
-                .flowOn(Dispatchers.IO)
+                .flowOn(dispatcherProvider.io)
                 .catch { e ->
-                    _Api_articleList.value = Resource.error(e.toString())
+                    _apiArticleList.value = Resource.error(e.toString())
                 }
                 .collect {
-                    _Api_articleList.value = Resource.success(it)
+                    _apiArticleList.value = Resource.success(it)
                 }
 
         }
@@ -41,15 +36,14 @@ class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineReposit
     }
 
      private fun fetchNewsFromNetworkAndSaveInDB(country:String) {
-        viewModelScope.launch {
-            Log.e("country",country)
+        viewModelScope.launch (dispatcherProvider.main){
                 topHeadlineRepository.getTopHeadlines(country)
-                    .flowOn(Dispatchers.IO)
+                    .flowOn(dispatcherProvider.io)
                     .catch { e ->
-                        _Api_articleList.value = Resource.error(e.toString())
+                        _apiArticleList.value = Resource.error(e.toString())
                     }
                     .collect {
-                        _Api_articleList.value = Resource.success(it)
+                        _apiArticleList.value = Resource.success(it)
                     }
 
         }

@@ -1,6 +1,5 @@
 package com.kader.newsappkdr.data.api
 
-import com.kader.newsappkdr.data.api.Networking.API_KEY
 import com.kader.newsappkdr.data.model.CountriesResponse
 import com.kader.newsappkdr.data.model.NewsSourcesResponse
 import com.kader.newsappkdr.data.model.SearchNewssResponse

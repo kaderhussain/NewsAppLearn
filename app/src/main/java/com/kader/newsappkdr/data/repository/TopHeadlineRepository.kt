@@ -8,6 +8,7 @@ import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.data.local.entity.Article
 import com.kader.newsappkdr.data.model.ApiArticle
 import com.kader.newsappkdr.data.model.toArticle
+import com.kader.newsappkdr.utils.DefaultDispatcher
 import kotlinx.coroutines.flow.flatMapConcat
 import javax.inject.Inject
 import javax.inject.Singleton

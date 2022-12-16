@@ -9,6 +9,7 @@ import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.data.repository.*
 import com.kader.newsappkdr.di.ApplicationContext
 import com.kader.newsappkdr.di.module.ApplicationModule
+import com.kader.newsappkdr.utils.DefaultDispatcher
 import dagger.Provides
 import javax.inject.Singleton
 
@@ -36,5 +37,7 @@ interface ApplicationComponent {
     fun getSearchNewRepository(): SearchRepository
 
     fun getNetworkHelper(): NetworkHelper
+
+    fun getDefaultDispatcher(): DefaultDispatcher
 
 }

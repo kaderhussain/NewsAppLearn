@@ -18,6 +18,7 @@ import com.kader.newsappkdr.ui.search.SearchViewAdapter
 import com.kader.newsappkdr.ui.search.SearchViewModel
 import com.kader.newsappkdr.ui.topheadline.TopHeadlineAdapter
 import com.kader.newsappkdr.ui.topheadline.TopHeadlineViewModel
+import com.kader.newsappkdr.utils.DefaultDispatcher
 import dagger.Module
 import dagger.Provides
 
@@ -32,10 +33,10 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
 
     @Provides
-    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository,networkHelper: NetworkHelper): TopHeadlineViewModel {
+    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository,networkHelper: NetworkHelper,defaultDispatcher: DefaultDispatcher): TopHeadlineViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(TopHeadlineViewModel::class) {
-                TopHeadlineViewModel(topHeadlineRepository, networkHelper)
+                TopHeadlineViewModel(topHeadlineRepository, networkHelper,defaultDispatcher)
             })[TopHeadlineViewModel::class.java]
     }
 
