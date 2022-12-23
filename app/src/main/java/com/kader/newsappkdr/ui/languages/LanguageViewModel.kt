@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class LanguageViewModel(private val languageRepository: LanguageRepository):ViewModel() {
-    private val _languageList = MutableStateFlow<Resource<List<Language>>>(Resource.loading())
+    private val _languageList = MutableStateFlow<Resource<List<Language>>>(Resource.Loading())
 
     val languageList: StateFlow<Resource<List<Language>>> = _languageList
 
@@ -23,10 +23,10 @@ class LanguageViewModel(private val languageRepository: LanguageRepository):View
         viewModelScope.launch {
             languageRepository.getLanguages()
                 .catch { e ->
-                    _languageList.value = Resource.error(e.toString())
+                    _languageList.value = Resource.Error(e.toString())
                 }
                 .collect {
-                    _languageList.value = Resource.success(it)
+                    _languageList.value = Resource.Success(it)
                 }
         }
     }

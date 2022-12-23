@@ -1,8 +1,7 @@
-package com.kader.newsappkdr
+package com.kader.newsappkdr.viewmodel_test
 
 import app.cash.turbine.test
 import com.kader.newsappkdr.data.api.NetworkHelper
-import com.kader.newsappkdr.data.api.NetworkServices
 import com.kader.newsappkdr.data.local.entity.Article
 import com.kader.newsappkdr.data.repository.TopHeadlineRepository
 import com.kader.newsappkdr.ui.topheadline.TopHeadlineViewModel
@@ -10,25 +9,17 @@ import com.kader.newsappkdr.utils.DispatcherProvider
 import com.kader.newsappkdr.utils.Resource
 import com.kader.newsappkdr.utils.TestDispatcherProvider
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
 import org.junit.Test
-import org.junit.Assert.*
 import org.junit.After
-import org.junit.Assert
 import org.junit.Before
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
@@ -63,7 +54,7 @@ class TopHeadLineViewModelTest {
             viewModel.fetchNews(country)
 
             viewModel.apiArticleList.test{
-                assertEquals(Resource.success(emptyList<List<Article>>()), awaitItem())
+                assertEquals(Resource.Success(emptyList<List<Article>>()), awaitItem())
                 cancelAndIgnoreRemainingEvents() //removing the observer
             }
 
@@ -85,7 +76,7 @@ class TopHeadLineViewModelTest {
             viewModel.fetchNews(country)
 
             viewModel.apiArticleList.test{
-                assertEquals(Resource.success(emptyList<List<Article>>()), awaitItem())
+                assertEquals(Resource.Success(emptyList<List<Article>>()), awaitItem())
                 cancelAndIgnoreRemainingEvents()
             }
 
@@ -115,7 +106,7 @@ class TopHeadLineViewModelTest {
 
             viewModel.apiArticleList.test {
                 assertEquals(
-                    Resource.error<List<Article>>(IllegalStateException(errorMessage).toString()),
+                    Resource.Error<List<Article>>(IllegalStateException(errorMessage).toString()),
                     awaitItem()
                 )
                 cancelAndIgnoreRemainingEvents()

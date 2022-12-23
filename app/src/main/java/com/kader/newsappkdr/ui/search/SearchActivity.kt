@@ -3,7 +3,9 @@ package com.kader.newsappkdr.ui.search
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -13,6 +15,7 @@ import com.kader.newsappkdr.data.model.ApiArticle
 import com.kader.newsappkdr.databinding.ActivitySearchBinding
 import com.kader.newsappkdr.di.component.DaggerActivityComponent
 import com.kader.newsappkdr.di.module.ActivityModule
+import com.kader.newsappkdr.utils.Status
 import com.kader.newsappkdr.utils.getQueryTextChangeStateFlow
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -53,8 +56,6 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupUI()
-//        setupObserver()
-
 
     }
 
@@ -109,32 +110,6 @@ class SearchActivity : AppCompatActivity() {
 
 
 
-//    private fun setupObserver() {
-//        lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                searchViewModel.articleList.collect {
-//                    when (it.status) {
-//                        Status.SUCCESS -> {
-//                            binding.progressBar.visibility = View.GONE
-//                            Log.e("newsList ","--${it.data}")
-//                            it.data?.let { newsList -> renderList(newsList) }
-//                            binding.recyclerView.visibility = View.VISIBLE
-//                        }
-//                        Status.LOADING -> {
-//                            binding.progressBar.visibility = View.VISIBLE
-//                            binding.recyclerView.visibility = View.GONE
-//                        }
-//                        Status.ERROR -> {
-//                            //Handle Error
-//                            binding.progressBar.visibility = View.GONE
-//                            Toast.makeText(this@SearchActivity, it.message, Toast.LENGTH_LONG)
-//                                .show()
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     private fun renderList(apiArticleList: List<ApiArticle>) {
         adapter.replaceData(apiArticleList)

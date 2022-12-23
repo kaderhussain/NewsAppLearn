@@ -41,15 +41,15 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
-    fun provideNewsSourcesViewModel(newsSourcesRepository: NewsSourcesRepository): NewsSourcesViewModel{
+    fun provideNewsSourcesViewModel(newsSourcesRepository: NewsSourcesRepository,defaultDispatcher: DefaultDispatcher): NewsSourcesViewModel{
         return  ViewModelProvider(activity,
             ViewModelProviderFactory(NewsSourcesViewModel::class){
-                NewsSourcesViewModel(newsSourcesRepository)
+                NewsSourcesViewModel(newsSourcesRepository,defaultDispatcher)
             })[NewsSourcesViewModel::class.java]
     }
 
     @Provides
-    fun provideSearchNews(searchRepository: SearchRepository): SearchViewModel {
+    fun provideSearchNewsViewModel(searchRepository: SearchRepository): SearchViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(SearchViewModel::class) {
                 SearchViewModel(searchRepository)

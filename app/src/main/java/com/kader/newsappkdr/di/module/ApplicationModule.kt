@@ -7,6 +7,7 @@ import com.kader.newsappkdr.data.api.AuthInterceptor
 import com.kader.newsappkdr.data.api.NetworkServices
 import com.kader.newsappkdr.data.local.AppDatabase
 import com.kader.newsappkdr.di.*
+import com.kader.newsappkdr.utils.AppConstant
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -40,11 +41,11 @@ class ApplicationModule(private val application: NewsApplication) {
 
     @BaseUrl
     @Provides
-    fun provideBaseUrl(): String = "https://newsapi.org/v2/"
+    fun provideBaseUrl(): String = AppConstant.BASE_URL
 
     @ApiKey
     @Provides
-    fun provideAPIKey(): String = "9f6482a584804376874b848980b7a044"
+    fun provideAPIKey(): String = AppConstant.API_KEY
 
     @Provides
     @Singleton

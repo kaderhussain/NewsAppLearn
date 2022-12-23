@@ -3,10 +3,14 @@ package com.kader.newsappkdr.utils
 import android.util.Log
 import com.kader.newsappkdr.data.model.Country
 import com.kader.newsappkdr.data.model.Language
+import com.kader.newsappkdr.di.BaseUrl
 
 object AppConstant {
 
     const val COUNTRY="in"
+
+    const val API_KEY="9f6482a584804376874b848980b7a044"
+    const val BASE_URL="https://newsapi.org/v2/"
 
     val LANGUAGES = arrayListOf(Language("en","English"),
         Language("ar","Arabic"),

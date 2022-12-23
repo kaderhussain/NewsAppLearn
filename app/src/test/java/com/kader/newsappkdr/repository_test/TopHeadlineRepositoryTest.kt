@@ -1,4 +1,4 @@
-package com.kader.newsappkdr.repositoryTest
+package com.kader.newsappkdr.repository_test
 
 import app.cash.turbine.test
 import com.kader.newsappkdr.data.api.NetworkServices

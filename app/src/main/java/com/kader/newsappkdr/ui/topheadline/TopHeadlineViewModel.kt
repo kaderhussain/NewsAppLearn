@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineRepository,private val networkHelper:NetworkHelper,private val dispatcherProvider: DispatcherProvider) : ViewModel() {
 
-    private val _apiArticleList = MutableStateFlow<Resource<List<Article>>>(Resource.loading())
+    private val _apiArticleList = MutableStateFlow<Resource<List<Article>>>(Resource.Loading())
 
     val apiArticleList: StateFlow<Resource<List<Article>>> = _apiArticleList
 
@@ -25,10 +25,10 @@ class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineReposit
             topHeadlineRepository.getTopHeadlineDirectlyFromDB()
                 .flowOn(dispatcherProvider.io)
                 .catch { e ->
-                    _apiArticleList.value = Resource.error(e.toString())
+                    _apiArticleList.value = Resource.Error(e.toString())
                 }
                 .collect {
-                    _apiArticleList.value = Resource.success(it)
+                    _apiArticleList.value = Resource.Success(it)
                 }
 
         }
@@ -40,10 +40,10 @@ class TopHeadlineViewModel(private val topHeadlineRepository: TopHeadlineReposit
                 topHeadlineRepository.getTopHeadlines(country)
                     .flowOn(dispatcherProvider.io)
                     .catch { e ->
-                        _apiArticleList.value = Resource.error(e.toString())
+                        _apiArticleList.value = Resource.Error(e.toString())
                     }
                     .collect {
-                        _apiArticleList.value = Resource.success(it)
+                        _apiArticleList.value = Resource.Success(it)
                     }
 
         }

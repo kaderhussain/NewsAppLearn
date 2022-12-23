@@ -1,20 +1,7 @@
 package com.kader.newsappkdr.utils
 
-data class Resource<out T>(val status:Status,val data:T?,val message:String?) {
-
-    companion object{
-
-        fun <T> success(data:T?):Resource<T>{
-            return Resource(Status.SUCCESS, data, null)
-        }
-
-        fun <T> error(msg: String): Resource<T> {
-            return Resource(Status.ERROR, null, msg)
-        }
-
-        fun <T> loading(): Resource<T> {
-            return Resource(Status.LOADING, null, null)
-        }
-    }
-
+sealed class Resource<T>(val status:Status,val data:T?,val message:String?) {
+    class Success<T>(data: T?): Resource<T>(Status.SUCCESS,data,null)
+    class Error<T>(msg:String): Resource<T>(Status.ERROR,null,msg)
+    class Loading<T>(): Resource<T>(Status.LOADING,null,null)
 }

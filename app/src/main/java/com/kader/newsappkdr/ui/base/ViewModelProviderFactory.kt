@@ -6,15 +6,15 @@ import javax.inject.Singleton
 import kotlin.reflect.KClass
 
 @Singleton
-class ViewModelProviderFactory<T : ViewModel>(
-    private val kClass: KClass<T>,
-    private val creator: () -> T
+class ViewModelProviderFactory<L : ViewModel>(
+    private val kClass: KClass<L>,
+    private val creator: () -> L
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalArgumentException::class)
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(kClass.java)) return creator() as T
+    override fun <L : ViewModel> create(modelClass: Class<L>): L {
+        if (modelClass.isAssignableFrom(kClass.java)) return creator() as L
         throw IllegalArgumentException("Unknown class name")
     }
 
