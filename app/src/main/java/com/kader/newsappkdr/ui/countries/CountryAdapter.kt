@@ -17,7 +17,12 @@ class CountryAdapter(
         fun bind(language: Country) {
             binding.textViewTitle.text = language.country
             binding.textViewTitle.setOnClickListener {
-                it.context.startActivity(TopHeadlineActivity.getStartIntent( it.context,language.id))
+                it.context.startActivity(
+                    TopHeadlineActivity.getStartIntent(
+                        it.context,
+                        language.id
+                    )
+                )
             }
         }
     }

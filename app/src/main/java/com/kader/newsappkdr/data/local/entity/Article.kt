@@ -11,6 +11,6 @@ data class Article(
     @ColumnInfo(name = "description")   val description: String?,
     @ColumnInfo(name = "url")  val url: String,
     @ColumnInfo(name = "imageUrl")  val imageUrl: String? ,
-    @ColumnInfo(name = "source_id")  val source_id: String?,
-    @ColumnInfo(name = "source_name")  val source_name: String
+    @ColumnInfo(name = "sourceId")  val sourceId: String?,
+    @ColumnInfo(name = "sourceName")  val sourceName: String
 )

@@ -20,12 +20,12 @@ import com.kader.newsappkdr.utils.Status
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LanguageActivity: AppCompatActivity() {
+class LanguageActivity : AppCompatActivity() {
 
-    companion object{
-        private const val EXTRA_USERID="EXTRA_USERID"
+    companion object {
+        private const val EXTRA_USERID = "EXTRA_USERID"
 
-        fun getStartIntent(context: Context): Intent{
+        fun getStartIntent(context: Context): Intent {
             return Intent(context, LanguageActivity::class.java)
 
         }
@@ -34,7 +34,6 @@ class LanguageActivity: AppCompatActivity() {
 
     @Inject
     lateinit var languageViewModel: LanguageViewModel
-
 
 
     @Inject

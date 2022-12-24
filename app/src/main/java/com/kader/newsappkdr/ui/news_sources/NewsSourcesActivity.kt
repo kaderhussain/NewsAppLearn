@@ -20,12 +20,12 @@ import com.kader.newsappkdr.utils.Status
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class NewsSourcesActivity: AppCompatActivity() {
+class NewsSourcesActivity : AppCompatActivity() {
 
-    companion object{
-        private const val EXTRA_USERID="EXTRA_USERID"
+    companion object {
+        private const val EXTRA_USERID = "EXTRA_USERID"
 
-        fun getStartIntent(context: Context): Intent{
+        fun getStartIntent(context: Context): Intent {
             return Intent(context, NewsSourcesActivity::class.java)
 
         }

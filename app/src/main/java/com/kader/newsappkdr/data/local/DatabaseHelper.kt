@@ -9,6 +9,6 @@ interface DatabaseHelper {
 
     fun deleteAll(): Int
 
-    fun insertAll(users: List<Article>): Flow<Unit>
+    fun insertAll(article: List<Article>): Flow<Unit>
 
 }

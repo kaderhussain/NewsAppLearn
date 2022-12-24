@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kader.newsappkdr.data.model.NewsSources
 import com.kader.newsappkdr.databinding.NewsSourcesItemLayoutBinding
 
-class NewsSourcesAdapter (
+class NewsSourcesAdapter(
     private val newSourceList: ArrayList<NewsSources>
 ) : RecyclerView.Adapter<NewsSourcesAdapter.DataViewHolder>() {
 

@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.kader.newsappkdr.data.api.NetworkHelper
-import com.kader.newsappkdr.data.local.DatabaseHelperImpl
 import com.kader.newsappkdr.data.repository.*
 import com.kader.newsappkdr.di.ActivityContext
 import com.kader.newsappkdr.ui.base.ViewModelProviderFactory
@@ -33,18 +32,25 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
 
     @Provides
-    fun provideNewsListViewModel(topHeadlineRepository: TopHeadlineRepository,networkHelper: NetworkHelper,defaultDispatcher: DefaultDispatcher): TopHeadlineViewModel {
+    fun provideNewsListViewModel(
+        topHeadlineRepository: TopHeadlineRepository,
+        networkHelper: NetworkHelper,
+        defaultDispatcher: DefaultDispatcher
+    ): TopHeadlineViewModel {
         return ViewModelProvider(activity,
             ViewModelProviderFactory(TopHeadlineViewModel::class) {
-                TopHeadlineViewModel(topHeadlineRepository, networkHelper,defaultDispatcher)
+                TopHeadlineViewModel(topHeadlineRepository, networkHelper, defaultDispatcher)
             })[TopHeadlineViewModel::class.java]
     }
 
     @Provides
-    fun provideNewsSourcesViewModel(newsSourcesRepository: NewsSourcesRepository,defaultDispatcher: DefaultDispatcher): NewsSourcesViewModel{
-        return  ViewModelProvider(activity,
-            ViewModelProviderFactory(NewsSourcesViewModel::class){
-                NewsSourcesViewModel(newsSourcesRepository,defaultDispatcher)
+    fun provideNewsSourcesViewModel(
+        newsSourcesRepository: NewsSourcesRepository,
+        defaultDispatcher: DefaultDispatcher
+    ): NewsSourcesViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(NewsSourcesViewModel::class) {
+                NewsSourcesViewModel(newsSourcesRepository, defaultDispatcher)
             })[NewsSourcesViewModel::class.java]
     }
 
@@ -57,21 +63,20 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
-    fun provideCountriesViewModel(countriesRepository: CountriesRepository): CountryViewModel{
-        return  ViewModelProvider(activity,
-            ViewModelProviderFactory(CountryViewModel::class){
+    fun provideCountriesViewModel(countriesRepository: CountriesRepository): CountryViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(CountryViewModel::class) {
                 CountryViewModel(countriesRepository)
             })[CountryViewModel::class.java]
     }
 
     @Provides
-    fun provideLanguageViewModel(languageRepository: LanguageRepository): LanguageViewModel{
-        return  ViewModelProvider(activity,
-            ViewModelProviderFactory(LanguageViewModel::class){
+    fun provideLanguageViewModel(languageRepository: LanguageRepository): LanguageViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(LanguageViewModel::class) {
                 LanguageViewModel(languageRepository)
             })[LanguageViewModel::class.java]
     }
-
 
 
     @Provides

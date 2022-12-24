@@ -20,12 +20,12 @@ import com.kader.newsappkdr.utils.Status
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CountryActivity: AppCompatActivity() {
+class CountryActivity : AppCompatActivity() {
 
-    companion object{
-        private const val EXTRA_USERID="EXTRA_USERID"
+    companion object {
+        private const val EXTRA_USERID = "EXTRA_USERID"
 
-        fun getStartIntent(context: Context): Intent{
+        fun getStartIntent(context: Context): Intent {
             return Intent(context, CountryActivity::class.java)
 
         }
@@ -89,7 +89,7 @@ class CountryActivity: AppCompatActivity() {
     }
 
     private fun renderList(countryList: List<Country>) {
-        adapter.addData(countryList.distinctBy{it.country})
+        adapter.addData(countryList.distinctBy { it.country })
         adapter.notifyDataSetChanged()
     }
 

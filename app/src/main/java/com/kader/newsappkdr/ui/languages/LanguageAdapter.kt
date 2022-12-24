@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kader.newsappkdr.data.model.Language
 import com.kader.newsappkdr.databinding.CountriesItemLayoutBinding
 
-class LanguageAdapter (
+class LanguageAdapter(
     private val languageList: ArrayList<Language>
-    ) : RecyclerView.Adapter<LanguageAdapter.DataViewHolder>() {
+) : RecyclerView.Adapter<LanguageAdapter.DataViewHolder>() {
 
     class DataViewHolder(private val binding: CountriesItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {

@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-class CountryViewModel(private val countriesRepository:CountriesRepository):ViewModel() {
+class CountryViewModel(private val countriesRepository: CountriesRepository) : ViewModel() {
     private val _countryList = MutableStateFlow<Resource<List<Country>>>(Resource.Loading())
 
     var countryList: StateFlow<Resource<List<Country>>> = _countryList
-    
+
     init {
         fetchNews()
     }

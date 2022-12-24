@@ -9,7 +9,6 @@ import javax.inject.Singleton
 @Singleton
 class AuthInterceptor @Inject constructor(@ApiKey private val apiKey: String) : Interceptor {
 
-
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
         request.addHeader("X-Api-Key", apiKey)

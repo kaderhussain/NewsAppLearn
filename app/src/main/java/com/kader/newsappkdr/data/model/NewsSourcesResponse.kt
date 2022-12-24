@@ -2,7 +2,7 @@ package com.kader.newsappkdr.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class NewsSourcesResponse (
+data class NewsSourcesResponse(
     @SerializedName("status")
     val status: String = "",
     @SerializedName("sources")

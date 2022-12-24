@@ -48,7 +48,7 @@ class TopHeadLineViewModelTest {
         runTest {
             val country="us"
             doReturn(flowOf(emptyList<Article>())).`when`(topHeadlineRepository).getTopHeadlines(country)
-            doReturn(true).`when`(networkHelper).isNetworkconnected()
+            doReturn(true).`when`(networkHelper).isNetworkConnected()
             val viewModel = TopHeadlineViewModel(topHeadlineRepository, networkHelper, dispatcherProvider)
 
             viewModel.fetchNews(country)
@@ -60,7 +60,7 @@ class TopHeadLineViewModelTest {
 
             //
             verify(topHeadlineRepository).getTopHeadlines(country)
-            verify(networkHelper).isNetworkconnected()
+            verify(networkHelper).isNetworkConnected()
 
         }
     }
@@ -70,7 +70,7 @@ class TopHeadLineViewModelTest {
         runTest {
             val country="us"
             doReturn(flowOf(emptyList<Article>())).`when`(topHeadlineRepository).getTopHeadlineDirectlyFromDB()
-            doReturn(false).`when`(networkHelper).isNetworkconnected()
+            doReturn(false).`when`(networkHelper).isNetworkConnected()
             val viewModel = TopHeadlineViewModel(topHeadlineRepository, networkHelper, dispatcherProvider)
 
             viewModel.fetchNews(country)
@@ -82,7 +82,7 @@ class TopHeadLineViewModelTest {
 
             //
             verify(topHeadlineRepository).getTopHeadlineDirectlyFromDB()
-            verify(networkHelper).isNetworkconnected()
+            verify(networkHelper).isNetworkConnected()
 
         }
     }
@@ -99,7 +99,7 @@ class TopHeadLineViewModelTest {
                 throw IllegalStateException(errorMessage)
             }).`when`(topHeadlineRepository).getTopHeadlines(country)
 
-            doReturn(true).`when`(networkHelper).isNetworkconnected()
+            doReturn(true).`when`(networkHelper).isNetworkConnected()
 
             val viewModel = TopHeadlineViewModel(topHeadlineRepository, networkHelper, dispatcherProvider)
             viewModel.fetchNews(country)
@@ -112,7 +112,7 @@ class TopHeadLineViewModelTest {
                 cancelAndIgnoreRemainingEvents()
             }
             verify(topHeadlineRepository).getTopHeadlines(country)
-            verify(networkHelper).isNetworkconnected()
+            verify(networkHelper).isNetworkConnected()
 
         }
     }

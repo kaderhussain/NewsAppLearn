@@ -50,7 +50,7 @@ class SearchViewAdapter(
         apiArticleList.addAll(list)
     }
 
-    fun replaceData(list: List<ApiArticle>){
+    fun replaceData(list: List<ApiArticle>) {
         apiArticleList.clear()
         apiArticleList.addAll(list)
 

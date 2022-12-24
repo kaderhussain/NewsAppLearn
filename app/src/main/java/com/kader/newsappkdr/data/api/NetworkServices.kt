@@ -5,7 +5,6 @@ import com.kader.newsappkdr.data.model.NewsSourcesResponse
 import com.kader.newsappkdr.data.model.SearchNewssResponse
 import com.kader.newsappkdr.data.model.TopHeadlinesResponse
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Query
 import javax.inject.Singleton
 
@@ -25,9 +24,6 @@ interface NetworkServices {
     suspend fun getSearchNews(@Query("q") search: String): SearchNewssResponse
 
 }
-
-
-//
 
 
 

@@ -6,7 +6,10 @@ import com.kader.newsappkdr.NewsApplication
 import com.kader.newsappkdr.data.api.AuthInterceptor
 import com.kader.newsappkdr.data.api.NetworkServices
 import com.kader.newsappkdr.data.local.AppDatabase
-import com.kader.newsappkdr.di.*
+import com.kader.newsappkdr.di.ApiKey
+import com.kader.newsappkdr.di.ApplicationContext
+import com.kader.newsappkdr.di.BaseUrl
+import com.kader.newsappkdr.di.DatabaseName
 import com.kader.newsappkdr.utils.AppConstant
 import dagger.Module
 import dagger.Provides
@@ -27,16 +30,18 @@ class ApplicationModule(private val application: NewsApplication) {
 
     @DatabaseName
     @Provides
-    fun provideDatabaseName(): String="news_app_offline"
+    fun provideDatabaseName(): String = "news_app_offline"
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context:Context,@DatabaseName name:String): AppDatabase = Room.databaseBuilder(
+    fun provideDatabase(
+        @ApplicationContext context: Context,
+        @DatabaseName name: String
+    ): AppDatabase = Room.databaseBuilder(
         context,
         AppDatabase::class.java,
         name
     ).build()
-
 
 
     @BaseUrl
@@ -72,7 +77,6 @@ class ApplicationModule(private val application: NewsApplication) {
             .build()
             .create(NetworkServices::class.java)
     }
-
 
 
 }

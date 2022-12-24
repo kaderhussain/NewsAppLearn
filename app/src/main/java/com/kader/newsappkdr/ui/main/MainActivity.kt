@@ -1,7 +1,6 @@
 package com.kader.newsappkdr.ui.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.kader.newsappkdr.NewsApplication
@@ -13,19 +12,17 @@ import com.kader.newsappkdr.ui.languages.LanguageActivity
 import com.kader.newsappkdr.ui.news_sources.NewsSourcesActivity
 import com.kader.newsappkdr.ui.search.SearchActivity
 import com.kader.newsappkdr.ui.topheadline.TopHeadlineActivity
-import com.kader.newsappkdr.utils.AppConstant
-import javax.inject.Inject
 
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private val Tag="MainActivity"
+    private val Tag = "MainActivity"
 
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
         super.onCreate(savedInstanceState)
-        Log.e(Tag,"Started");
+        Log.e(Tag, "Started");
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -34,13 +31,11 @@ class MainActivity: AppCompatActivity() {
 //        setupObserver()
     }
 
-    private fun setupUI(){
-
-
+    private fun setupUI() {
 
 
         binding.btnTopHeadline.setOnClickListener {
-            startActivity(TopHeadlineActivity.getStartIntent(this,"us"))
+            startActivity(TopHeadlineActivity.getStartIntent(this, "us"))
         }
 
         binding.btnNewsSources.setOnClickListener {

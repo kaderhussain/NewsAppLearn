@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LanguageRepository @Inject constructor(){
+class LanguageRepository @Inject constructor() {
     fun getLanguages(): Flow<List<Language>> {
         return flow {
             emit(AppConstant.LANGUAGES)

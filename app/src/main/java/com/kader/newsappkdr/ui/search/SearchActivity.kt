@@ -3,9 +3,7 @@ package com.kader.newsappkdr.ui.search
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,27 +13,27 @@ import com.kader.newsappkdr.data.model.ApiArticle
 import com.kader.newsappkdr.databinding.ActivitySearchBinding
 import com.kader.newsappkdr.di.component.DaggerActivityComponent
 import com.kader.newsappkdr.di.module.ActivityModule
-import com.kader.newsappkdr.utils.Status
 import com.kader.newsappkdr.utils.getQueryTextChangeStateFlow
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchActivity : AppCompatActivity() {
 
-    companion object{
-        private const val EXTRA_COUNTRY="EXTRA_COUNTRY"
+    companion object {
+        private const val EXTRA_COUNTRY = "EXTRA_COUNTRY"
 
         fun getStartIntent(context: Context): Intent {
             return Intent(context, SearchActivity::class.java)
         }
-        fun getStartIntent(context: Context, country:String): Intent {
+
+        fun getStartIntent(context: Context, country: String): Intent {
             return Intent(context, SearchActivity::class.java)
                 .apply {
-                    putExtra(EXTRA_COUNTRY,country)
+                    putExtra(EXTRA_COUNTRY, country)
                 }
         }
-
 
 
     }
@@ -60,8 +58,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-
-    private fun setupUI(){
+    private fun setupUI() {
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(
@@ -77,13 +74,13 @@ class SearchActivity : AppCompatActivity() {
             searchView.getQueryTextChangeStateFlow()
                 .debounce(300)
                 .filter { query ->
-                    val validQuery = query.isNotEmpty() && query.length>3
-                    if(!validQuery){
-                            binding.progressBar.visibility = View.GONE
-                            renderList(emptyList())
-                            binding.recyclerView.visibility = View.VISIBLE
+                    val validQuery = query.isNotEmpty() && query.length > 3
+                    if (!validQuery) {
+                        binding.progressBar.visibility = View.GONE
+                        renderList(emptyList())
+                        binding.recyclerView.visibility = View.VISIBLE
 
-                    }else{
+                    } else {
                         binding.progressBar.visibility = View.VISIBLE
                     }
                     return@filter validQuery
@@ -92,10 +89,10 @@ class SearchActivity : AppCompatActivity() {
                 .distinctUntilChanged()
                 .flowOn(Dispatchers.Main)
                 .flatMapLatest { query ->
-                   return@flatMapLatest searchViewModel.fetchSearchNews(query)
-                       .catch {
-                           emitAll(flowOf(emptyList()))
-                       }
+                    return@flatMapLatest searchViewModel.fetchSearchNews(query)
+                        .catch {
+                            emitAll(flowOf(emptyList()))
+                        }
                 }
                 .flowOn(Dispatchers.IO)
                 .collect { result ->
@@ -106,9 +103,6 @@ class SearchActivity : AppCompatActivity() {
         }
 
     }
-
-
-
 
 
     private fun renderList(apiArticleList: List<ApiArticle>) {

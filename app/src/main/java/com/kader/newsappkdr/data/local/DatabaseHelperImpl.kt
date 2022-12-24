@@ -8,14 +8,16 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DatabaseHelperImpl @Inject constructor(private val appDatabase: AppDatabase) : DatabaseHelper {
+class DatabaseHelperImpl @Inject constructor(private val appDatabase: AppDatabase) :
+    DatabaseHelper {
 
-    override fun getTopHeadline(): Flow<List<Article>> = appDatabase.topHeadlineDao().getAllTopHeadline()
+    override fun getTopHeadline(): Flow<List<Article>> =
+        appDatabase.articleDao().getAllTopHeadline()
 
-    override fun deleteAll(): Int = appDatabase.topHeadlineDao().deleteAll()
+    override fun deleteAll(): Int = appDatabase.articleDao().deleteAll()
 
     override fun insertAll(article: List<Article>): Flow<Unit> = flow {
-        appDatabase.topHeadlineDao().insertAll(article)
+        appDatabase.articleDao().insertAll(article)
         emit(Unit)
     }
 

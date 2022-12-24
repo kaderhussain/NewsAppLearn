@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-class LanguageViewModel(private val languageRepository: LanguageRepository):ViewModel() {
+class LanguageViewModel(private val languageRepository: LanguageRepository) : ViewModel() {
     private val _languageList = MutableStateFlow<Resource<List<Language>>>(Resource.Loading())
 
     val languageList: StateFlow<Resource<List<Language>>> = _languageList

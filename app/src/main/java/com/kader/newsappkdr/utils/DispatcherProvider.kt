@@ -16,7 +16,7 @@ interface DispatcherProvider {
 }
 
 @Singleton
-class DefaultDispatcher @Inject constructor(): DispatcherProvider {
+class DefaultDispatcher @Inject constructor() : DispatcherProvider {
 
     override val main: CoroutineDispatcher
         get() = Dispatchers.Main
