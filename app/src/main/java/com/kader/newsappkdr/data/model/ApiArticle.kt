@@ -15,7 +15,6 @@ data class ApiArticle(
     @SerializedName("source")
     val apiSource: ApiSource
 )
-
 fun ApiArticle.toArticle(): Article = Article(
     title = this.title,
     description = this.description,

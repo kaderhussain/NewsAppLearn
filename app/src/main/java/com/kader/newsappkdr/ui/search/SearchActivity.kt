@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kader.newsappkdr.NewsApplication
@@ -68,6 +69,7 @@ class SearchActivity : AppCompatActivity() {
             )
         )
         recyclerView.adapter = adapter
+        recyclerView.setHasFixedSize(true)
 
         val searchView = binding.searchView
         lifecycleScope.launch {
@@ -77,7 +79,7 @@ class SearchActivity : AppCompatActivity() {
                     val validQuery = query.isNotEmpty() && query.length > 3
                     if (!validQuery) {
                         binding.progressBar.visibility = View.GONE
-                        renderList(emptyList())
+//                        renderList(emptyList())
                         binding.recyclerView.visibility = View.VISIBLE
 
                     } else {
@@ -91,7 +93,7 @@ class SearchActivity : AppCompatActivity() {
                 .flatMapLatest { query ->
                     return@flatMapLatest searchViewModel.fetchSearchNews(query)
                         .catch {
-                            emitAll(flowOf(emptyList()))
+//                            emitAll(flowOf(emptyList()))
                         }
                 }
                 .flowOn(Dispatchers.IO)
@@ -105,9 +107,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-    private fun renderList(apiArticleList: List<ApiArticle>) {
-        adapter.replaceData(apiArticleList)
-        adapter.notifyDataSetChanged()
+    private fun renderList(apiArticleList: PagingData<ApiArticle>) {
+        adapter.submitData(lifecycle,apiArticleList)
     }
 
     private fun injectDependencies() {

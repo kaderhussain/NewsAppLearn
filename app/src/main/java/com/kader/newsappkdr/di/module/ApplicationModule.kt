@@ -30,7 +30,7 @@ class ApplicationModule(private val application: NewsApplication) {
 
     @DatabaseName
     @Provides
-    fun provideDatabaseName(): String = "news_app_offline"
+    fun provideDatabaseName(): String = AppConstant.DB_NAME
 
     @Provides
     @Singleton

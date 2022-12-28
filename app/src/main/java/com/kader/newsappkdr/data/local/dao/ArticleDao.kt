@@ -1,5 +1,6 @@
 package com.kader.newsappkdr.data.local.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -12,8 +13,11 @@ interface ArticleDao {
     @Query("SELECT * FROM Article")
     fun getAllTopHeadline(): Flow<List<Article>>
 
+    @Query("SELECT * FROM Article")
+    fun getAllTopHeadlinePage(): PagingSource<Int,Article>
+
     @Insert
-    fun insertAll(topHeadline: List<Article>)
+    suspend fun insertAll(topHeadline: List<Article>)
 
     @Query("Delete from Article")
     fun deleteAll(): Int

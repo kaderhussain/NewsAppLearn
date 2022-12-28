@@ -16,7 +16,7 @@ class MidnightWorker(private val context: Context, params: WorkerParameters) :
 
     override fun doWork(): Result {
         GlobalScope.launch {
-            repository.getTopHeadlineRepository().getTopHeadlines("us")
+            repository.getTopHeadlineRepository().getTopHeadlines("us",1)
                 .catch { }
                 .collect {
 

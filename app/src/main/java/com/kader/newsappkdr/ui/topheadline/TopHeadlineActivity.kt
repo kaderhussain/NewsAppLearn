@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kader.newsappkdr.NewsApplication
@@ -21,6 +23,7 @@ import com.kader.newsappkdr.utils.Status
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@OptIn(ExperimentalPagingApi::class)
 class TopHeadlineActivity : AppCompatActivity() {
 
     companion object {
@@ -106,9 +109,8 @@ class TopHeadlineActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderList(articleList: List<Article>) {
-        adapter.addData(articleList)
-        adapter.notifyDataSetChanged()
+    private fun renderList(article: PagingData<Article>) {
+        adapter.submitData(lifecycle, article)
     }
 
     private fun injectDependencies() {

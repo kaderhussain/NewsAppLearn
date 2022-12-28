@@ -80,7 +80,7 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
 
     @Provides
-    fun provideDummiesAdapter() = TopHeadlineAdapter(ArrayList())
+    fun provideDummiesAdapter() = TopHeadlineAdapter()
 
     @Provides
     fun provideNewsSourcesAdapter() = NewsSourcesAdapter(ArrayList())
@@ -92,6 +92,7 @@ class ActivityModule(private val activity: AppCompatActivity) {
     fun provideLanguageAdapter() = LanguageAdapter(ArrayList())
 
     @Provides
-    fun provideSearchAdapter() = SearchViewAdapter(ArrayList())
+    fun provideSearchAdapter() = SearchViewAdapter()
+
 
 }

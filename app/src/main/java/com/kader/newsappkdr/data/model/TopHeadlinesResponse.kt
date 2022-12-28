@@ -8,5 +8,5 @@ data class TopHeadlinesResponse(
     @SerializedName("totalResults")
     val totalResults: Int = 0,
     @SerializedName("articles")
-    val apiArticles: List<ApiArticle> = ArrayList(),
+    val apiArticles: MutableList<ApiArticle> = ArrayList(),
 )
