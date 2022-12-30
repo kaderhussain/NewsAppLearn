@@ -1,6 +1,7 @@
 package com.kader.newsappkdr.worker
 
 import android.content.Context
+import androidx.paging.ExperimentalPagingApi
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.kader.newsappkdr.NewsApplication
@@ -14,9 +15,10 @@ class MidnightWorker(private val context: Context, params: WorkerParameters) :
 
     val repository = (context as NewsApplication).applicationComponent
 
+    @OptIn(ExperimentalPagingApi::class)
     override fun doWork(): Result {
         GlobalScope.launch {
-            repository.getTopHeadlineRepository().getTopHeadlines("us",1)
+            repository.getTopHeadlineRepository().getTopHeadlinesPage("us")
                 .catch { }
                 .collect {
 
